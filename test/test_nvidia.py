@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install x11-utils -y && apt-get clean
 
 CMD xdpyinfo
 """
-            dockerfile_tag = 'testfixture_%s_x11_validatw' % distro_version
+            dockerfile_tag = 'testfixture_%s_x11_validate' % distro_version
             iof = StringIO((dockerfile % locals()).encode())
             im = client.build(fileobj = iof, tag=dockerfile_tag)
             for e in im:
