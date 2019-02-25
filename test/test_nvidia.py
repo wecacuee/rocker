@@ -61,7 +61,7 @@ CMD xdpyinfo
         # "em.Error: interpreter stdout proxy lost"
         em.Interpreter._wasProxyInstalled = False
 
-    def test_nvidia_extension_basic(self):
+    def test_x11_extension_basic(self):
         plugins = list_plugins()
         active_plugin = plugins['x11']
         self.assertEqual(active_plugin.get_name(), 'x11')
