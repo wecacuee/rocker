@@ -15,7 +15,7 @@ install:
 
 # Nvidia not available on travis
 script:
-  - nosetests --with-coverage --cover-package rocker --exclude test_nvidia_glmark2
+  - nosetests --with-coverage --cover-package rocker --exclude test_nvidia_glmark2 --exclude test_x11_xpdyinfo
 
 after_success:
   - codecov
