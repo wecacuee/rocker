@@ -63,9 +63,19 @@ CMD xdpyinfo
 
     def test_x11_extension_basic(self):
         plugins = list_plugins()
-        active_plugin = plugins['x11']
-        self.assertEqual(active_plugin.get_name(), 'x11')
-        self.assertTrue(plugin_load_parser_correctly(active_plugin))
+        x11_plugin = plugins['x11']
+        self.assertEqual(x11_plugin.get_name(), 'x11')
+        self.assertTrue(plugin_load_parser_correctly(x11_plugin))
+        
+        p = x11_plugin()
+        mock_cliargs = {'base_image': 'ubuntu:xenial'}
+
+        docker_args = p.get_docker_args(mock_cliargs)
+        self.assertIn(' -e DISPLAY -e TERM', docker_args)
+        self.assertIn(' -e QT_X11_NO_MITSHM=1', docker_args)
+        self.assertIn(' -e XAUTHORITY=', docker_args)
+        self.assertIn(' -v /tmp/.X11-unix:/tmp/.X11-unix ', docker_args)
+        self.assertIn(' -v /etc/localtime:/etc/localtime:ro ', docker_args)
 
 
     def test_no_x11_xpdyinfo(self):
@@ -147,11 +157,11 @@ CMD glmark2 --validate
         self.assertIn('FROM nvidia/opengl:1.0-glvnd-devel-', preamble)
 
         docker_args = p.get_docker_args(mock_cliargs)
-        self.assertIn(' -e DISPLAY -e TERM', docker_args)
-        self.assertIn(' -e QT_X11_NO_MITSHM=1', docker_args)
-        self.assertIn(' -e XAUTHORITY=', docker_args)
-        self.assertIn(' -v /tmp/.X11-unix:/tmp/.X11-unix ', docker_args)
-        self.assertIn(' -v /etc/localtime:/etc/localtime:ro ', docker_args)
+        #TODO(tfoote) restore with #37 self.assertIn(' -e DISPLAY -e TERM', docker_args)
+        #TODO(tfoote) restore with #37 self.assertIn(' -e QT_X11_NO_MITSHM=1', docker_args)
+        #TODO(tfoote) restore with #37 self.assertIn(' -e XAUTHORITY=', docker_args)
+        #TODO(tfoote) restore with #37 self.assertIn(' -v /tmp/.X11-unix:/tmp/.X11-unix ', docker_args)
+        #TODO(tfoote) restore with #37 self.assertIn(' -v /etc/localtime:/etc/localtime:ro ', docker_args)
         self.assertIn(' --runtime=nvidia ', docker_args)
         self.assertIn(' --security-opt seccomp=unconfined', docker_args)
 

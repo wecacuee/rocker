@@ -44,7 +44,7 @@ class X11(RockerExtension):
   -e QT_X11_NO_MITSHM=1 \
   -e XAUTHORITY=%(xauth)s -v %(xauth)s:%(xauth)s \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
-  -v /etc/localtime:/etc/localtime:ro" % locals()
+  -v /etc/localtime:/etc/localtime:ro " % locals()
 
     def precondition_environment(self, cliargs):
         xauth = self.xauth
