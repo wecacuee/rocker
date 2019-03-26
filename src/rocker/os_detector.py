@@ -50,7 +50,7 @@ def build_detector_image():
     im = client.build(fileobj = iof, tag=dockerfile_tag)
     for l in im:
         pass
-        #print(l)
+        print(l)
 
 
 def detect_os(image_name):
@@ -60,7 +60,7 @@ def detect_os(image_name):
     im = client.build(fileobj = iof, tag=dockerfile_tag)
     for l in im:
         pass
-        #print(l)
+        print(l)
     
 
     cmd="docker run -it --rm %s" % dockerfile_tag
